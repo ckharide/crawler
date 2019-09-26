@@ -67,7 +67,7 @@ func ScrapeURL(url string, urlchannel chan string, chFinished chan bool) {
 
 			// Extract the href value, if there is one
 			ok, url := getHref(t)
-			fmt.Println("Scrape URL Got ", url)
+			//fmt.Println("Scrape URL Got ", url)
 			if !ok {
 				continue
 			}
