@@ -6,30 +6,26 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello World New")
-	testQueue()
+	init_main()
 }
 
 func buildGraph(url string) {
 
 }
 
-func testQueue() {
+func init_main() {
 	var x myutils.Queue
-	var g myutils.Graph
+	//var g myutils.Graph
 
-	x.NewQueue(100)
-	//x.Enqueue("http://yahoo.com")
-	x.Enqueue("http://google.com")
-
-	g.BuildGraph(100)
+	x.NewQueue(10)
+	x.Enqueue("http://www.google.com")
 
 	ch := make(chan string)
 	finishedch := make(chan bool)
 
 	url := x.Dequeue()
-	fmt.Println("Dequeued Item", url)
-	g.AddNode(myutils.Vertex{URL: url})
+	//fmt.Println("Dequeued Item", url)
+	//g.AddNode(myutils.Vertex{URL: url})
 
 	go myutils.ScrapeURL(url, ch, finishedch)
 
@@ -37,14 +33,11 @@ func testQueue() {
 		select {
 		case finalurl := <-ch:
 			x.Enqueue(finalurl)
-			//fmt.Println("Enqueued URL ", finalurl)
-			g.AddNode(myutils.Vertex{URL: finalurl})
-			g.AddEdge(&myutils.Vertex{URL: url}, &myutils.Vertex{URL: finalurl})
-			//g.Print()
-			fmt.Println("**************************\n")
-			fmt.Println("Size ", g.GetNodes())
-			/*case finished := <-finishedch:
-			fmt.Println("Finished", finished)*/
+			fmt.Println("Enqueued URL ", finalurl)
+			go myutils.ScrapeURL(finalurl, ch, finishedch)
+
+		case finished := <-finishedch:
+			fmt.Println("Finished", finished)
 		}
 	}
 
