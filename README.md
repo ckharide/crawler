@@ -1,4 +1,4 @@
-# mycrawler
+# Sample Crawler .. 
 
 Crawler rudimentary implementation based on Queues and go channels. 
 
