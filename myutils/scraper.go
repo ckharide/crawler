@@ -74,6 +74,7 @@ func ScrapeURL(url string, urlchannel chan string, chFinished chan bool) {
 
 			hasProto := strings.Index(url, "http") == 0
 			if hasProto {
+				fmt.Println("URL To be pushed ", url)
 				urlchannel <- url
 			}
 
