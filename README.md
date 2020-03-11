@@ -1,4 +1,4 @@
-# Sample Crawler .. 
+#  Crawler in Go.  
 
 Crawler rudimentary implementation based on Queues and go channels. 
 
