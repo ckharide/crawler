@@ -68,3 +68,9 @@ func (q *Queue) Dequeue() string {
 func (q *Queue) Size() int {
 	return q.count
 }
+
+func (q *Queue) Echo() {
+	for i := 0; i < q.count; i++ {
+		fmt.Printf(" URL value %s", q.nodes[i])
+	}
+}
